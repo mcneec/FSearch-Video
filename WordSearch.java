@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.Iterator;
 
+//This class works best if transcribed audio is entered in order
 public class WordSearch {
   public ArrayList<WordItem> wordArray; //Stores transcribed words in timeOrder
 
@@ -23,19 +24,19 @@ public class WordSearch {
   //Finds all objects that have matching words
   //@param String : the word to look for
   //@return ArrayList : All of the WordItem Objects that have a matching String
-  public ArrayList<WordItem> getWords(String word){
-    ArrayList<WordItem> result = new ArrayList<WordItem>(); //Result will contain all objects with matching words
+  public ArrayList<Integer> getWords(String word){
+    ArrayList<Integer> result = new ArrayList<Integer>(); //Result will contain all objects with matching words
     Iterator<WordItem> litr = wordArray.iterator(); //Iterator for main ArrayList
-    WordItem element;
+    //WordItem element;
     while(litr.hasNext()){ //Iterates through all objects in list
-      element = litr.next();
+      WordItem element = litr.next();
       if(element.word.compareToIgnoreCase(word) == 0) //Adds to result if words match
-        result.add(element);
+        result.add(wordArray.indexOf(element));
     }
-    //A Test to see if proper objects are selected
-    litr = result.iterator();
-    while (litr.hasNext()){
-      element = litr.next();
+    //A Test to see if proper Indexes are selected  are selected
+    Iterator<Integer> litr0 = result.iterator();
+    while (litr0.hasNext()){
+      Integer element = litr0.next();
       System.out.println(element);
     }
     return result;
