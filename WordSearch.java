@@ -1,8 +1,8 @@
 //Author: Cole McNee
-//Description: Search for words in consecutive locations to get timeStamps for
-//                F-Search Video project
+//Description: Search for words in consecutive locations to get timeStamps
+//                for F-Search Video project
 //File: WordSearch.java
-//Last Edited: 11/15/17
+//Last Edited: 11/17/17
 
 import java.util.*;
 import java.util.Iterator;
@@ -22,8 +22,8 @@ public class WordSearch {
 
   //Adds an item to the ArrayList
   //@param word, timeStamp : respective data needed to create new WordItem Object
-  //@return boolean : true on success, false on failure
-  private boolean add(String word, int timeStamp){
+  //@return boolean : true on success adding to Array, false on failure
+  private boolean add(String word, long timeStamp){
     WordItem a = new WordItem(word, timeStamp);
     if(wordArray.contains(a)) //Checks if the object is already in the list. Don't add it if it isn't.
       return false;
@@ -32,7 +32,8 @@ public class WordSearch {
   }
 
   //Finds all objects that have matching words
-  //@param String : the word to look for
+  //@param word
+  //    The String to look for in video transcript
   //@return ArrayList : All of the WordItem Objects Indexes that have a matching String
   private ArrayList<Integer> findWord(String word){
     ArrayList<Integer> result = new ArrayList<Integer>(); //Result will contain all objects with matching words
@@ -56,10 +57,11 @@ public class WordSearch {
   //  as the add function should be done before user is able to search.
   //  In ArrayList form the results can be used through a GUI to cycle through
   //  the seperate timeStamps in the video
-  //@param String : any number of words from 1 up to ...
-  //@return ArrayList : Returns the timeStamp of all ocurrences of the given String(s)
-  public ArrayList<Integer> findWords(String... words){
-    ArrayList<Integer> result = new ArrayList<Integer>();
+  //@param words
+  //     Any number of words from 1 up to ...
+  //@return ArrayList : the timeStamp of all ocurrences of the first given string if all strings match
+  public ArrayList<Long> findWords(String... words){ //Can convert to String[] if needed
+    ArrayList<Long> result = new ArrayList<Long>();
     ArrayList<Integer> indexes = findWord(words[0]); //Find indexes of each occurence of the first word
 
     if(words.length > 1){ //Only Run if the array has a length larger than 1
@@ -77,7 +79,7 @@ public class WordSearch {
     }
 
     Iterator<Integer> litr = indexes.iterator();
-    Integer element;
+    Long element;
     while(litr.hasNext()){
       Integer temp = litr.next();
       if(temp != null){
@@ -91,8 +93,8 @@ public class WordSearch {
   }
 
   public static void main(String args[]){
-    //More work will need to be done for testing but for the base case is
-    //  shown to be succesful in this case
+    //More testing will need to be done but the base case is
+    //  shown to be succesful below
     WordSearch list = new WordSearch();
     list.add("hello", 12);
     list.add("today", 14);
@@ -100,8 +102,9 @@ public class WordSearch {
     list.add("hello", 19);
     list.add("today", 21);
     list.add("we", 180);
+    list.add("hello", 190);
 
-    //list.findWords("hello");
+    list.findWords("hello");
     list.findWords("hello", "today");
     list.findWords("we", "hello");
   }

@@ -1,8 +1,8 @@
 public class WordItem {
   String word;
-  int timeStamp;
+  long timeStamp;
 
-  public WordItem(String word, int timeStamp){
+  public WordItem(String word, long timeStamp){
     this.word = word;
     this.timeStamp = timeStamp;
   }
