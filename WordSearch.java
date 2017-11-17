@@ -61,14 +61,17 @@ public class WordSearch {
   public ArrayList<Integer> findWords(String... words){
     ArrayList<Integer> result = new ArrayList<Integer>();
     ArrayList<Integer> indexes = findWord(words[0]); //Find indexes of each occurence of the first word
-    if(words.length > 1){ //Only Run if the array has a length larger than 1
 
+    if(words.length > 1){ //Only Run if the array has a length larger than 1
       for(int i = 1; i < words.length; i++){
         for(int j = 0; j < indexes.size(); j++){
-          if(indexes.get(j) != null){
-            if(wordArray.get(indexes.get(j) + i).word.compareToIgnoreCase(words[i]) != 0) //Compare the next index position with each
-              indexes.remove(indexes.get(j));                                             //consecutive word and remove it if it doesn't match
-          }
+          if(indexes.get(j) != null && (indexes.get(j) + i) < wordArray.size()){
+            //if(wordArray.get(indexes.get(j) + i) != null){
+              if(wordArray.get(indexes.get(j) + i).word.compareToIgnoreCase(words[i]) != 0) //Compare the next index position with each
+                indexes.remove(indexes.get(j));                 //consecutive word and remove it if it doesn't match
+            //  }
+          } else if ((indexes.get(j) + i) >= wordArray.size())
+              indexes.remove(indexes.get(j));
         }
       }
     }
@@ -96,11 +99,11 @@ public class WordSearch {
     list.add("we", 18);
     list.add("hello", 19);
     list.add("today", 21);
-    list.add("wee", 180);
+    list.add("we", 180);
 
     //list.findWords("hello");
-    //list.findWords("hello", "today");
-    list.findWords("hello", "today", "wee");
+    list.findWords("hello", "today");
+    list.findWords("we", "hello");
   }
 
 }
